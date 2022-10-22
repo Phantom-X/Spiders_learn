@@ -7,6 +7,16 @@
 @IDE：PyCharm2021.3.1
 @Email: 2909981736@qq.com
 """
+
+'''为什么要解密参数:
+        直接用加密过后的参数post是可以爬取到的，
+        但是每一首歌就得需要一组加密参数，
+        就不能批量爬取了，但是如果知道真实参数和解密过程，
+        那只要批量获取每个歌曲的id(在url里)，就可以批量爬取了
+'''
+
+
+# js逆向
 # 1.找到未加密的参数                      # window.asrsea(参数, xxx,xxx,xxx); 加密函数
 # 2.想办法把参数加密(必须参考网易的加密逻辑)  params->encText,encSecKey->encSecKey
 # 3.请求到网易, 拿到评论信息
@@ -23,7 +33,7 @@ url = 'https://music.163.com/weapi/comment/resource/comments/get?csrf_token='
 
 # 请求方式 POST
 
-# 真是参数
+# 真实参数
 data = {
     'csrf_token': "",
     'cursor': "-1",
@@ -103,7 +113,9 @@ def enc_params(data, key):  # 加密过程
     
     encText：
     两次加密：
-    数据+g -> b -> 第一次加密结果+i -> b = encText = params
+    数据+g -> b
+                -> 第一次加密结果+i 
+                        -> b = encText = params
 """
 
 resp = requests.post(url, data={
@@ -112,3 +124,4 @@ resp = requests.post(url, data={
     "encSecKey": get_encSecKey()
 })
 print(resp.text)
+resp.close()
