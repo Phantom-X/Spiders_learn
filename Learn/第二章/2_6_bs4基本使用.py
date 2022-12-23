@@ -23,6 +23,7 @@ resp.close()
 # 解析数据
 # 1.把页面源代码交给BeautifulSoup进行处理, 生成bs对象
 page = BeautifulSoup(resp.text, 'html.parser')  # 指定html解析器
+
 # 2.从bs对象查找数据
 # find(标签, 属性=值)
 # find_all(标签, 属性=值)
