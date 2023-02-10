@@ -17,7 +17,6 @@ value = input('请输入要翻译的英文: ')
 data = {
     'kw': value
 }
-
 resp = requests.post(url, data=data)
 # 将响应内容直接处理成json格式数据(字典dict)
 print(resp.json())

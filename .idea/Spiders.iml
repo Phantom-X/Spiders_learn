@@ -5,8 +5,19 @@
       <excludeFolder url="file://$MODULE_DIR$/Learn/第二章/2_7_photo" />
       <excludeFolder url="file://$MODULE_DIR$/project/tpxl.com/photo" />
       <excludeFolder url="file://$MODULE_DIR$/Learn/第四章/西游记" />
+      <excludeFolder url="file://$MODULE_DIR$/Learn/第四章/simplevideo" />
+      <excludeFolder url="file://$MODULE_DIR$/project/ycfloor.com/img" />
+      <excludeFolder url="file://$MODULE_DIR$/project/ycfloor.com/image" />
+      <excludeFolder url="file://$MODULE_DIR$/project/ycfloor.com/案例" />
+      <excludeFolder url="file://$MODULE_DIR$/project/liumingye.cn/华语金曲千禧年前的旋律" />
+      <excludeFolder url="file://$MODULE_DIR$/project/liumingye.cn/yes" />
+      <excludeFolder url="file://$MODULE_DIR$/project/liumingye.cn/no" />
+      <excludeFolder url="file://$MODULE_DIR$/project/liumingye.cn/华语金曲千禧年前的旋律备份" />
+      <excludeFolder url="file://$MODULE_DIR$/project/liumingye.cn/yes备份" />
+      <excludeFolder url="file://$MODULE_DIR$/project/liumingye.cn/华语金曲千禧年前" />
+      <excludeFolder url="file://$MODULE_DIR$/Learn/第四章/difficultvideo" />
     </content>
-    <orderEntry type="inheritedJdk" />
+    <orderEntry type="jdk" jdkName="Python 3.8 (base)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
 </module>

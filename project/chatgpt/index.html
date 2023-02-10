@@ -1,0 +1,60 @@
+
+<html>
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" type="text/css" href="frontend/css/bootstrap.min.css">
+    </style>
+   <script src="frontend/js/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body>
+<div align="center">
+    <h1>ChatGPT<small>大型语言模型 by OpenAI</small></h1>
+    <form class="form-inline center-block" action="javascript:postchatgpt()">
+      <div class="form-group">
+        <p class="form-control-static"></p>
+      </div>
+      <div class="form-group">
+        <input type="text" class="form-control" id="problem" placeholder="输入问题">
+      </div>
+      <button type="submit" class="btn btn-default glyphicon glyphicon-search" id="btn">让chatgpt来回答吧</button>
+    </form>
+    <div class="form-group" id="result"></div>
+</div>
+
+<script>
+  function postchatgpt(){
+      $("#btn").attr("disabled", true)
+     $("#result").html("loading...")
+    $.ajax({
+            type:"post",
+            url:"http://localhost:5000/chatgpt/",
+            contentType: "application/json",
+            data:JSON.stringify({
+              "message":$("#problem").val()
+            }),
+            dataType:"json", // 响应数据类型
+            success:function (res){  // 成功的回调函数
+                if (res.indexOf("\"statusCode\":500,\"message\":\"Internal server error\"")!==-1){
+                    $("#result").html(marked.parse("```服务器繁忙，请重新请求```"));
+                    $("#btn").attr("disabled", false)
+                }else {
+                    $("#result").html(marked.parse(res));
+                    $("#btn").attr("disabled", false)
+                }
+            },
+            error:function (){  // 请求失败的回调函数
+                alert("请求失败！")
+                $("#btn").attr("disabled", false)
+            }
+    })
+  }
+</script>
+
+<div class="panel-footer" align="center">
+                <p class="footer">版权所有 © 2022Phantom pcw &nbsp;&nbsp;
+                    <a href="http://beian.miit.gov.cn/" target="_blank" >皖ICP备2022005155号-1</a></p>
+</div>
+
+</body>
+</html>

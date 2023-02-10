@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
+  <title>首页</title>
+  <link rel="stylesheet" href="weui.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div class="box">
+    <img src="index.png" alt="" style="width:100%;">
+    <div class="mt-20" style="padding: 0 24px;">
+      <form name="form" id="form">
+        <div>
+          <div class="c-6 fs-12">查询人电话(手机号码)<span class="c-f52">*</span></div>
+          <input type="text" class="input mt-8" id="phone" required pattern="REG_PHONE" emptyTips="请输入手机号码" notMatchTips="请输入正确的手机号码">
+        </div>
+        <div class="mt-24">
+          <div class="c-6 fs-12">报告编号<span class="c-f52">*</span></div>
+          <input type="text" class="input mt-8" emptyTips="请输入编号" id="sn" required>
+        </div>
+        <div class="subBtn fs-15 c-white mt-24 t-c">提交</div>
+      </form>
+    </div>
+    <div class="indexBottom c-white t-c">
+      <div class="mt-16 fs-15">业务范围：</div>
+      <div class="fs-20 bold mt-8">防静电产品检测、防静电工程检测、ESD评估认证、ESD技术培训</div>
+      <div class="mt-24 fs-15">业务咨询电话：</div>
+      <div class="fs-20 bold mt-8">
+        <span class="ver-mid dis-inb">010-68869773</span>
+        <a href="tel:010-68869773" class="pBtn fs-12 ver-mid">点击拨打</a>
+      </div>
+      <div class="fs-20 bold mt-12">
+        <span class="ver-mid dis-inb">010-68865301</span>
+        <a href="tel:010-68865301" class="pBtn fs-12 ver-mid">点击拨打</a>
+      </div>
+    </div>
+  </div>
+
+  <script src="weui.min.js"></script>
+  <script src="jquery.min.js"></script>
+  <script>
+    var winHeight = $(window).height();  //获取当前页面高度
+      $(window).resize(function () {
+        var thisHeight = $(this).height();
+        if (winHeight - thisHeight > 140) {
+          //键盘弹出
+          $('.indexBottom').css('display', 'none');
+        } else {
+          //键盘收起
+          $('.indexBottom').css({ 'display': 'block', 'position': 'fixed', 'bottom': '0' });
+        }
+      })
+    var btn = document.querySelector('.subBtn');
+    btn.onclick = function () {
+      weui.form.validate('#form', function (error) {
+        if (!error) {
+          // var loading = weui.loading('提交中...');
+          $.ajax({
+            url: '/Index/query/check', //请求的url地址
+            data: {
+              phone: form.phone.value,
+              sn: form.sn.value,
+            }, //参数值
+            type: "POST", //请求方式
+            success: function (res) {
+              // console.log(res.id);
+              if (res.status == true) {
+                window.location.href = "/Index/query/index?id=" + res.id;
+              } else {
+                weui.toast(res.msg);
+                return false;
+              }
+            },
+            error: function (req) {}
+          });
+        }
+        // return true; // 当return true时，不会显示错误
+      }, {
+        regexp: {
+          PHONE: /[0-9]{11}$/,
+        }
+      });
+    }
+  </script>
+</body>
+
+</html>
