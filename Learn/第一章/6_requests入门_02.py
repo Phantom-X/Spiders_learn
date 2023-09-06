@@ -20,6 +20,6 @@ data = {
 resp = requests.post(url, data=data)
 # 将响应内容直接处理成json格式数据(字典dict)
 print(resp.json())
-
+print(resp.json()['data'][0]['v'])
 # 关掉resp
 resp.close()
